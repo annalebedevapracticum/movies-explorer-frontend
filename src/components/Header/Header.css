@@ -1,17 +1,17 @@
 .header {
     display: flex;
     background-color: #5C5C5C;
-    padding: 21px 70px;
+    padding: 0 70px;
     justify-content: space-between;
     align-items: center;
-
+    height: 74px;
 }
 
 .header__logo {
     max-width: 38px;
 }
 
-.header__actions{
+.header__actions {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;

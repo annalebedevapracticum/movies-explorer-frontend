@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 import { useState } from 'react';
+import Promo from '../Main/Promo/Promo';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <Promo />
     </div>
   );
 }
