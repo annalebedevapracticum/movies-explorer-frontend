@@ -10,7 +10,7 @@ function Header({ onLogOut, email }) {
             <img className="header__logo" alt="Лого" src={logo} />
             <div>
                 <Routes>
-                    <Route path="/" element={<div className='header__action-logged'>
+                    <Route path="/" element={<div className='header__actions'>
                         <Link to="/sign-up" className="header__action-register">Регистрация</Link>
                         <Link to="/" className="header__action-entry">Войти</Link>
                     </div>} />

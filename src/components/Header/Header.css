@@ -4,15 +4,19 @@
     padding: 21px 70px;
     justify-content: space-between;
     align-items: center;
+
+}
+
+.header__logo {
+    max-width: 38px;
+}
+
+.header__actions{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-}
-
-.header__logo {
-    max-width: 38px;
 }
 
 .header__action-register {
