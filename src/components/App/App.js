@@ -5,6 +5,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import { useState } from 'react';
 import Promo from '../Main/Promo/Promo';
 import AboutProject from '../Main/AboutProject/AboutProject';
+import Techs from '../Main/Techs/Techs';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ function App() {
       </BrowserRouter>
       <Promo />
       <AboutProject />
+      <Techs/>
     </div>
   );
 }
