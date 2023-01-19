@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 import { useState } from 'react';
 import Promo from '../Main/Promo/Promo';
+import AboutProject from '../Main/AboutProject/AboutProject';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -28,6 +29,7 @@ function App() {
         </div>
       </BrowserRouter>
       <Promo />
+      <AboutProject />
     </div>
   );
 }
