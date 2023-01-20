@@ -1,8 +1,10 @@
 .about-project {
     padding: 75px 70px;
+    font-family: 'Inter';
+    font-style: normal;
 }
 
-.about-project__wrapper {
+.about-project__info {
     display: flex;
     margin-top: 70px;
     gap: 40px;
@@ -35,8 +37,6 @@
     margin: 0;
     text-align: center;
     padding: 9px;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -58,8 +58,6 @@
 .about-project__progress-description {
     margin: 0;
     text-align: center;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;

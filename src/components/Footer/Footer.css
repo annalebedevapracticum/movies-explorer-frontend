@@ -1,13 +1,13 @@
 .footer {
     background-color: #FAFAFA;
     padding: 0 70px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
 }
 
 .footer__title {
     margin: 0;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     text-align: center;
@@ -21,13 +21,9 @@
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
-   
 }
 
 .footer__year {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
     font-size: 13px;
     line-height: 16px;
 }
@@ -36,9 +32,7 @@
 .footer__link {
     margin: 0;
     text-decoration: none;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
+    
     font-size: 13px;
     line-height: 16px;
     color: #000000;
