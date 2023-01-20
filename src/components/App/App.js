@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Promo from '../Main/Promo/Promo';
 import AboutProject from '../Main/AboutProject/AboutProject';
 import Techs from '../Main/Techs/Techs';
+import AboutMe from '../Main/AboutMe/AboutMe';
+import Portfolio from '../Main/Portfolio/Portfolio';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,7 +33,9 @@ function App() {
       </BrowserRouter>
       <Promo />
       <AboutProject />
-      <Techs/>
+      <Techs />
+      <AboutMe />
+      <Portfolio />
     </div>
   );
 }
