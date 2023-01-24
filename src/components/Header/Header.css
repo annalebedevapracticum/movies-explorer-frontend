@@ -7,6 +7,10 @@
     height: 74px;
 }
 
+.header-white {
+    background-color: #FFFFFF;
+}
+
 .header__logo {
     max-width: 38px;
 }

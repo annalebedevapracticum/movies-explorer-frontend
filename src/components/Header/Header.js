@@ -1,21 +1,20 @@
 import logo from '../../images/logo.svg';
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
 import './Header.css';
+import { Link } from 'react-router-dom';
+import NavTab from '../Main/NavTab/NavTab';
 
 
-function Header({ onLogOut, email }) {
+function Header({ onLogOut, email, loggedIn, isMainPage }) {
     return (
-        <header className="header">
+        <header className={`header ${!isMainPage ? "header-white" : ""}`}>
             <img className="header__logo" alt="Лого" src={logo} />
-            <Routes>
-                <Route path="/" element={<div className='header__actions'>
-                    <Link to="/sign-up" className="header__action-register">Регистрация</Link>
-                    <Link to="/" className="header__action-entry">Войти</Link>
-                </div>} />
-                <Route path="/sign-in" element={<Link onClick={onLogOut} to="/sign-in">Аккаунт</Link>} />
-            </Routes>
-        </header>
+            {!loggedIn && <div className='header__actions'>
+                <Link to="/sign-up" className="header__action-register">Регистрация</Link>
+                <Link to="/" className="header__action-entry">Войти</Link>
+            </div>}
+            {loggedIn && <NavTab />}
+        </header >
     )
 }
 

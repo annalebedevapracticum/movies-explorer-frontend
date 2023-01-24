@@ -1,22 +1,19 @@
 import './App.css';
 import Header from '../Header/Header';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Footer from "../Footer/Footer";
 import ProtectedRoute from '../ProtectedRoute';
 import { useState } from 'react';
-import Promo from '../Main/Promo/Promo';
-import AboutProject from '../Main/AboutProject/AboutProject';
-import Techs from '../Main/Techs/Techs';
-import AboutMe from '../Main/AboutMe/AboutMe';
-import Portfolio from '../Main/Portfolio/Portfolio';
-import Footer from '../Footer/Footer';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
     <div className="page">
       <BrowserRouter>
-        <Header
-        />
         <div className="content">
           <Routes>
             <Route path="/sign-in" element={<>
@@ -25,18 +22,22 @@ function App() {
             <Route path="/sign-up" element={<></>
               // <Register onRegister={register} />
             } />
-            <Route path="/" element={<></>
+            <Route path="/" element={<>
+              <Header loggedIn={loggedIn} isMainPage />
+              <Main />
+            </>
+              // <ProtectedRoute loggedIn={loggedIn}>
+              // </ProtectedRoute>
+            } />
+            <Route path="/movies" element={<>
+              <Header loggedIn={loggedIn} />
+              <Movies /></>
               // <ProtectedRoute loggedIn={loggedIn}>
               // </ProtectedRoute>
             } />
           </Routes>
         </div>
       </BrowserRouter>
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
       <Footer />
     </div>
   );

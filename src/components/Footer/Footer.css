@@ -4,6 +4,8 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
+    padding-top: 79px;
+
 }
 
 .footer__title {
@@ -11,10 +13,10 @@
     font-size: 13px;
     line-height: 16px;
     text-align: center;
+    font-weight: 400;
     color: #A0A0A0;
     padding-bottom: 20px;
     border-bottom: 1px solid #E8E8E8;
-    margin-top: 79px;
 }
 
 .footer__info {
@@ -26,13 +28,14 @@
 .footer__year {
     font-size: 13px;
     line-height: 16px;
+    font-weight: 400;
 }
 
 
 .footer__link {
     margin: 0;
     text-decoration: none;
-    
+    font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     color: #000000;
