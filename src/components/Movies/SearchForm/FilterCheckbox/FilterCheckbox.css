@@ -1,4 +1,4 @@
-.checkbox-ios {
+.checkbox {
     margin: 0;
     font-family: 'Inter';
     font-style: normal;
@@ -9,11 +9,11 @@
     align-items: center;
 }
 
-.checkbox {
+.checkbox__filter {
     margin: 0;
 }
 
-.checkbox-ios .checkbox-ios-switch {
+.checkbox .checkbox__filter-switch {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
@@ -25,7 +25,7 @@
     margin-left: 14px;
 }
 
-.checkbox-ios .checkbox-ios-switch:before {
+.checkbox .checkbox__filter-switch:before {
     content: '';
     position: absolute;
     top: 2px;
@@ -37,11 +37,11 @@
     transition: .15s;
 }
 
-.checkbox-ios input[type=checkbox]:checked+.checkbox-ios-switch {
+.checkbox input[type=checkbox]:checked+.checkbox__filter-switch {
     background: #A0A0A0;
 }
 
-.checkbox-ios input[type=checkbox] {
+.checkbox input[type=checkbox] {
     display: block;
     width: 0;
     height: 0;
@@ -51,10 +51,10 @@
 }
 
 
-.checkbox-ios input[type=checkbox]:checked+.checkbox-ios-switch:before {
+.checkbox input[type=checkbox]:checked+.checkbox__filter-switch:before {
     transform: translateX(-20px);
 }
 
-.checkbox-ios input[type="checkbox"]:not(:disabled)+.checkbox-ios-switch {
+.checkbox input[type="checkbox"]:not(:disabled)+.checkbox__filter-switch {
     cursor: pointer;
 }

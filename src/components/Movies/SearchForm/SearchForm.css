@@ -32,7 +32,7 @@
 
 
 .search-form__find::placeholder {
-    opacity: .2;
+   color: #A0A0A0;
 }
 
 .search-form__find:focus {
