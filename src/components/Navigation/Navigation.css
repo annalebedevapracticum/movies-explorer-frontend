@@ -1,4 +1,4 @@
-.nav-tab {
+.navigation {
     display: flex;
     justify-content: space-between;
     flex: 1;
@@ -35,7 +35,7 @@
 }
 
 
-.nav-tab__movies {
+.navigation__movies {
     margin: 0;
     text-decoration: none;
     font-family: 'Inter';
@@ -47,6 +47,6 @@
     margin-right: 16px;
 }
 
-.nav-tab__saved-movies {
+.navigation__saved-movies {
     font-weight: 400;
 }
