@@ -7,6 +7,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import { useState } from 'react';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 
 function App() {
@@ -14,29 +15,34 @@ function App() {
   return (
     <div className="page">
       <BrowserRouter>
-        <div className="content">
-          <Routes>
-            <Route path="/sign-in" element={<>
-              {/* <Login isLoggedId={loggedIn} onLogin={login} /> */}
-            </>} />
-            <Route path="/sign-up" element={<></>
-              // <Register onRegister={register} />
-            } />
-            <Route path="/" element={<>
-              <Header loggedIn={loggedIn} isMainPage />
-              <Main />
-            </>
-              // <ProtectedRoute loggedIn={loggedIn}>
-              // </ProtectedRoute>
-            } />
-            <Route path="/movies" element={<>
-              <Header loggedIn={loggedIn} />
-              <Movies /></>
-              // <ProtectedRoute loggedIn={loggedIn}>
-              // </ProtectedRoute>
-            } />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/sign-in" element={<>
+            {/* <Login isLoggedId={loggedIn} onLogin={login} /> */}
+          </>} />
+          <Route path="/sign-up" element={<></>
+            // <Register onRegister={register} />
+          } />
+          <Route path="/" element={<>
+            <Header loggedIn={loggedIn} isMainPage />
+            <Main />
+          </>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+          <Route path="/movies" element={<>
+            <Header loggedIn={loggedIn} />
+            <Movies /></>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+          <Route path="/saved-movies" element={<>
+            <Header loggedIn={loggedIn} />
+            <SavedMovies /></>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+        </Routes>
+
       </BrowserRouter>
       <Footer />
     </div>

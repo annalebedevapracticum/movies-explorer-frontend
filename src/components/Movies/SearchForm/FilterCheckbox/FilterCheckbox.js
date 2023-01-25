@@ -5,10 +5,10 @@ import './FilterCheckbox.css';
 function FilterCheckbox({ label, onChange, checked }) {
     return (
         <div>
-            <label class="checkbox">
+            <label className="checkbox">
                 <span>{label}</span>
-                <input type="checkbox"  class="checkbox__filter" onChange={onChange} checked={checked} />
-                <span class="checkbox__filter-switch"></span>
+                <input type="checkbox"  className="checkbox__filter" onChange={onChange} checked={checked} />
+                <span className="checkbox__filter-switch"></span>
             </label>
         </div>
 
