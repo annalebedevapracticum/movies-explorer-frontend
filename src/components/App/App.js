@@ -8,6 +8,10 @@ import { useState } from 'react';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Profile from '../Profile/Profile';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 
 function App() {
@@ -25,26 +29,53 @@ function App() {
           <Route path="/" element={<>
             <Header loggedIn={loggedIn} isMainPage />
             <Main />
+            <Footer />
           </>
             // <ProtectedRoute loggedIn={loggedIn}>
             // </ProtectedRoute>
           } />
           <Route path="/movies" element={<>
             <Header loggedIn={loggedIn} />
-            <Movies /></>
+            <Movies />
+            <Footer />
+          </>
             // <ProtectedRoute loggedIn={loggedIn}>
             // </ProtectedRoute>
           } />
           <Route path="/saved-movies" element={<>
             <Header loggedIn={loggedIn} />
-            <SavedMovies /></>
+            <SavedMovies />
+            <Footer />
+          </>
             // <ProtectedRoute loggedIn={loggedIn}>
             // </ProtectedRoute>
+          } />
+          <Route path="/signin" element={<>
+            <Login /></>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+          <Route path="/signup" element={<>
+            <Register /></>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+          <Route path="/profile" element={<>
+            <Header loggedIn={loggedIn} />
+            <Profile />
+          </>
+            // <ProtectedRoute loggedIn={loggedIn}>
+            // </ProtectedRoute>
+          } />
+            <Route path="/error/:id" element={<>
+              <ErrorPage />
+            </>
+              // <ProtectedRoute loggedIn={loggedIn}>
+              // </ProtectedRoute>
           } />
         </Routes>
 
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }
