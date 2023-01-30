@@ -21,7 +21,7 @@
     height: 14px;
     border-radius: 20px;
     vertical-align: top;
-    background:  #2BE080;
+    background: #2BE080;
     margin-left: 14px;
 }
 
@@ -50,11 +50,16 @@
     opacity: 0;
 }
 
-
 .checkbox input[type=checkbox]:checked+.checkbox__filter-switch:before {
     transform: translateX(-20px);
 }
 
 .checkbox input[type="checkbox"]:not(:disabled)+.checkbox__filter-switch {
     cursor: pointer;
+}
+
+@media screen and (max-width: 1279px) {
+    .checkbox {
+        margin-top: 38px;
+    }
 }

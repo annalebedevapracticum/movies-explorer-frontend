@@ -30,11 +30,24 @@
     border-left: none;
 }
 
-
 .search-form__find::placeholder {
-   color: #A0A0A0;
+    color: #A0A0A0;
 }
 
 .search-form__find:focus {
     outline: none;
+}
+
+@media screen and (max-width: 1279px) {
+    .search-form__wrapper {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 30px;
+        padding: 60px 0 57px;
+    }
+
+    .search-form {
+        width: 100%;
+        margin: 0;
+    }
 }
