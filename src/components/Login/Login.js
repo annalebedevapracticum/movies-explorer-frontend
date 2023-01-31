@@ -28,12 +28,14 @@ function Login({ onLogin }) {
             <div className='login__wrapper'>
                 <img className="header__logo" alt="Лого" src={logo} />
                 <h2 className="login__welcome">Рады видеть!</h2>
-                <label className="login__label" htmlFor="email">Email</label>
-                <input id="email" className="login__input" value={email} onChange={handleEmailChange} name="email" type="email" />
-                <div className="divider" />
-                <label className="login__label" htmlFor="password">Пароль</label>
-                <input id="password" className="login__input" value={password} onChange={handlePasswordChange} name="password" type="password" />
-                <div className="divider" />
+                <div className='login__welcome_wrapper'>
+                    <label className="login__label" htmlFor="email">Email</label>
+                    <input id="email" className="login__input" value={email} onChange={handleEmailChange} name="email" type="email" />
+                    <div className="divider" />
+                    <label className="login__label" htmlFor="password">Пароль</label>
+                    <input id="password" className="login__input" value={password} onChange={handlePasswordChange} name="password" type="password" />
+                    <div className="divider" />
+                </div>
             </div>
             <button type="submit" className="login__button">Войти</button>
             <div className="login__check">

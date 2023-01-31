@@ -33,3 +33,15 @@
         grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
     }
 }
+
+@media screen and (max-width: 767px) {
+    .movies-cards {
+        padding: 50px 10px 0;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 39px;
+    }
+
+    .movies-cards__button {
+        margin: 50px 40px 80px;
+    }
+}
