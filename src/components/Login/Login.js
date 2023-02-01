@@ -5,6 +5,7 @@ import './Login.css';
 
 
 function Login({ onLogin }) {
+    const [error, setError] = useState('Что-то пошло не так...');
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,9 +25,9 @@ function Login({ onLogin }) {
     }
 
     return (
-        <form className="login" onSubmit={handleLogin}>
+        <form className="login" onSubmit={handleLogin} noValidate>
             <div className='login__wrapper'>
-                <img className="header__logo" alt="Лого" src={logo} />
+                <Link to="/"><img className="header__logo" alt="Лого" src={logo} /></Link>
                 <h2 className="login__welcome">Рады видеть!</h2>
                 <div className='login__welcome_wrapper'>
                     <label className="login__label" htmlFor="email">Email</label>
@@ -35,6 +36,7 @@ function Login({ onLogin }) {
                     <label className="login__label" htmlFor="password">Пароль</label>
                     <input id="password" className="login__input" value={password} onChange={handlePasswordChange} name="password" type="password" />
                     <div className="divider" />
+                    {error && <div className="login__error">{error}</div>}
                 </div>
             </div>
             <button type="submit" className="login__button">Войти</button>

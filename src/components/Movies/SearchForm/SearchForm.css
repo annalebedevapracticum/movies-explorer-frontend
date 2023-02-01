@@ -24,6 +24,10 @@
     flex: 1;
 }
 
+.search-form__button:hover {
+    opacity: 0.8;
+}
+
 .search-form__button {
     background-color: #FFFFFF;
     cursor: pointer;
@@ -38,7 +42,6 @@
 
 .search-form__find::placeholder {
     color: #A0A0A0;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;

@@ -17,7 +17,9 @@ function MoviesCardList({ data }) {
 
     return (<>
         <div className='movies-cards'>
-            {getCards().map((item, index) => <MoviesCard link={baseUrl + item.image.url} name={item.nameRU} duration={item.duration} isLiked={index % 3 === 0} hasDelete={index % 5 === 0} />)}
+            {data.length
+                ? getCards().map((item, index) => <MoviesCard link={baseUrl + item.image.url} name={item.nameRU} duration={item.duration} isLiked={index % 3 === 0} hasDelete={index % 5 === 0} />)
+                : <div className='movies-cards__not-found'>По вашему запросу ничего не найдено</div>}
         </div>
         {cardsCount < data.length && <div className='movies-cards__wrapper'>
             <button className='movies-cards__button' onClick={handleMoreClick}>Ещё</button>

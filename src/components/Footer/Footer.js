@@ -9,8 +9,8 @@ function Footer() {
             <div className="footer__info">
                 <p className="footer__year">&copy; 2023</p>
                 <div className='footer__wrapper'>
-                    <a className="footer__link" href='#'>Яндекс.Практикум</a>
-                    <a className="footer__link" href='#'>Github</a>
+                    <a className="footer__link" target="_blank" href='https://practicum.yandex.ru/' rel="noreferrer">Яндекс.Практикум</a>
+                    <a className="footer__link" target="_blank" href='https://github.com/annalebedevapracticum' rel="noreferrer">Github</a>
                 </div>
             </div>
         </footer>

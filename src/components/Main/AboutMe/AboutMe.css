@@ -1,7 +1,5 @@
 .about-me {
     padding: 75px 70px;
-    font-family: 'Inter';
-    font-style: normal;
 }
 
 .about-me__wrapper {
@@ -50,6 +48,11 @@
     color: #000000;
     margin-bottom: 100px;
 
+}
+
+
+.about-me__info:hover {
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 1279px) {

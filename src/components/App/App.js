@@ -1,4 +1,5 @@
 import './App.css';
+import '../../vendor/normalize.css'
 import Header from '../Header/Header';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -12,6 +13,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
+
 
 
 function App() {

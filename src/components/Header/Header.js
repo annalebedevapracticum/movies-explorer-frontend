@@ -8,7 +8,7 @@ import Navigation from '../Navigation/Navigation';
 function Header({ onLogOut, email, loggedIn, isMainPage }) {
     return (
         <header className={`header ${!isMainPage ? "header-white" : ""}`}>
-            <img className="header__logo" alt="Лого" src={logo} />
+            <Link  to="/"><img className="header__logo" alt="Лого" src={logo} /></Link>
             {isMainPage && <div className='header__actions'>
                 <Link to="/signup" className="header__action-register">Регистрация</Link>
                 <Link to="/signin" className="header__action-entry">Войти</Link>

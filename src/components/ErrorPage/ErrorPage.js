@@ -18,11 +18,11 @@ const ErrorPage = ({ }) => {
         }
     }
     return (
-        <div className='error-page'>
+        <section className='error-page'>
             <h2 className='error-page__title'>{id}</h2>
             <span className='error-page__description'>{getErrorText()}</span>
             <button className='error-page__button'>Назад</button>
-        </div>
+        </section>
     )
 }
 

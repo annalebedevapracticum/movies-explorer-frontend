@@ -16,8 +16,6 @@
 }
 
 .header__actions {
-    font-family: 'Inter';
-    font-style: normal;
     font-size: 12px;
 }
 
@@ -28,6 +26,11 @@
     line-height: 16px;
 }
 
+
+.header__action-register:hover{
+    opacity: 0.8;
+}
+
 .header__action-entry {
     background-color: #2BE080;
     color: #000000;
@@ -35,6 +38,10 @@
     text-decoration: none;
     padding: 8px 20px;
     border-radius: 3px;
+}
+
+.header__action-entry:hover{
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 1279px) {

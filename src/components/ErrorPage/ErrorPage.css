@@ -7,8 +7,6 @@
 
 .error-page__title {
     margin: 0;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 140px;
     line-height: 169px;
@@ -16,7 +14,6 @@
 
 .error-page__description {
     margin: 0;
-    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -27,12 +24,16 @@
 .error-page__button {
     border: none;
     background: none;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #2BE080;
     margin-top: 184px;
+    cursor: pointer;
+}
+
+.error-page__button:hover {
+    opacity: 0.8;
 }
 
 
@@ -42,11 +43,13 @@
         font-size: 80px;
         line-height: 97px;
     }
+
     .error-page__description {
         font-size: 12px;
         line-height: 15px;
         margin-top: 10px;
     }
+
     .error-page__button {
         font-size: 12px;
         line-height: 15px;

@@ -1,7 +1,5 @@
 .about-project {
     padding: 75px 70px;
-    font-family: 'Inter';
-    font-style: normal;
 }
 
 .about-project__info {
@@ -119,7 +117,6 @@
 
     .about-project__progress-title {
         margin: 0;
-        padding: 11px;
         font-size: 11px;
         line-height: 13px;
     }

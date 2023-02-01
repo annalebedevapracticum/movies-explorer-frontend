@@ -11,8 +11,6 @@
     display: flex;
     justify-content: space-between;
     margin: 14px 10px;
-    font-family: 'Inter';
-    font-style: normal;
 }
 
 .movies-card__title {
@@ -51,12 +49,11 @@
     position: absolute;
     right: 14px;
     top: 14px;
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 400;
     font-size: 10px;
     line-height: 9px;
     background-color: #F9F9F9;
+    cursor: pointer;
 }
 
 .movies-card__toogl {
@@ -68,6 +65,7 @@
     position: absolute;
     right: 14px;
     top: 14px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1279px) {
