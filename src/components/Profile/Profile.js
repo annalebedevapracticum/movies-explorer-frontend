@@ -4,7 +4,7 @@ import './Profile.css';
 import '../Login/Login.css'
 
 
-function Profile({ }) {
+function Profile() {
     const [error, setError] = useState('Что-то пошло не так...');
     const basename = 'Виталий';
     const baseemail = 'pochta@yandex.ru';

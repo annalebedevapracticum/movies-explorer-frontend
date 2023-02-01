@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import '../ErrorPage/ErrorPage.css'
 
 
-const ErrorPage = ({ }) => {
+const ErrorPage = () => {
     const { id } = useParams();
     const getErrorText = () => {
         switch (id) {
