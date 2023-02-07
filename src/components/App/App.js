@@ -1,7 +1,7 @@
 import './App.css';
 import '../../vendor/normalize.css'
 import Header from '../Header/Header';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from "../Footer/Footer";
 import { useState } from 'react';
@@ -12,11 +12,47 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import { useMainApi } from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute';
 
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const apiInstance = useMainApi();
+
+  const login = ({ email, password }) => {
+    return apiInstance.authorize({ email, password }).then(token => {
+      localStorage.setItem('token', token);
+      setLoggedIn(true);
+    })
+  };
+
+  const register = ({ email, password, name }) => {
+    return apiInstance.register({ email, password, name })
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+  };
+
+  const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+    const { data } = await apiInstance.checkMe();
+    if (data.email) {
+      setLoggedIn(true);
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, [loggedIn]);
+
+
   return (
     <div className="page">
       <BrowserRouter>
@@ -27,32 +63,32 @@ function App() {
             <Footer />
           </>
           } />
-          <Route path="/movies" element={<>
+          <Route path="/movies" element={<ProtectedRoute loggedIn={loggedIn}>
             <Header loggedIn={loggedIn} />
             <Movies />
             <Footer />
-          </>
+          </ProtectedRoute>
           } />
-          <Route path="/saved-movies" element={<>
+          <Route path="/saved-movies" element={<ProtectedRoute loggedIn={loggedIn}>
             <Header loggedIn={loggedIn} />
             <SavedMovies />
             <Footer />
-          </>
+          </ProtectedRoute>
           } />
           <Route path="/signin" element={<>
-            <Login /></>
+            <Login onLogin={login} /></>
           } />
           <Route path="/signup" element={<>
-            <Register /></>
+            <Register onRegister={register} /></>
           } />
-          <Route path="/profile" element={<>
+          <Route path="/profile" element={<ProtectedRoute loggedIn={loggedIn}>
             <Header loggedIn={loggedIn} />
-            <Profile />
-          </>
+            <Profile onLogout={logout} />
+          </ProtectedRoute>
           } />
-            <Route path="/error/:id" element={<>
-              <ErrorPage />
-            </>
+          <Route path="/error/:id" element={<>
+            <ErrorPage />
+          </>
           } />
         </Routes>
 

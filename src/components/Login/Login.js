@@ -5,7 +5,7 @@ import './Login.css';
 
 
 function Login({ onLogin }) {
-    const [error, setError] = useState('Что-то пошло не так...');
+    const [error, setError] = useState();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +13,10 @@ function Login({ onLogin }) {
     const handleLogin = (e) => {
         e.preventDefault();
         onLogin({ email, password }).then(() => {
-            navigate('/');
+            navigate('/movies');
+        }).catch(error => {
+            setError('Что-то пошло не так...');
+            console.log(error);
         })
     }
 

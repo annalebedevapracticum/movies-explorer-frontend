@@ -4,7 +4,7 @@ import './Profile.css';
 import '../Login/Login.css'
 
 
-function Profile() {
+function Profile({onLogout}) {
     const [error, setError] = useState('Что-то пошло не так...');
     const basename = 'Виталий';
     const baseemail = 'pochta@yandex.ru';
@@ -47,7 +47,7 @@ function Profile() {
                 {error && <div className="login__error">{error}</div>}
             </div>
             {!isEditMode ? <button type="submit" className="profile__button" onClick={handleEditModeClick}> Редактировать </button> : <button className="profile__button-save"> Сохранить </button>}
-            {!isEditMode && <Link to="/signup"><button type="submit" className="profile__button_exit">Выйти из аккаунта</button></Link>}
+            {!isEditMode && <Link to="/signin"><button type="submit" className="profile__button_exit" onClick={onLogout}>Выйти из аккаунта</button></Link>}
         </form>
     )
 }

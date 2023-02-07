@@ -16,7 +16,7 @@ function Register({ onRegister }) {
     const handleRegister = (e) => {
         e.preventDefault();
         onRegister({ email, password, name }).then(() => {
-            navigate('/sign-in');
+            navigate('/movies');
         })
     }
     function handleNameChange(e) {

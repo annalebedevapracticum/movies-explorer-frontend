@@ -7,7 +7,7 @@ function Navigation() {
 
     useEffect(() => {
         setMobileMenuVisible(false);
-    }, [window.location.href]);
+    }, [window.location.pathname]);
 
     const handleBurgerChange = () => {
         setMobileMenuVisible(!mobileMenuVisible);

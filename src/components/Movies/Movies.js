@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import SearchForm from "./SearchForm/SearchForm";
+import { useMoviesApi } from '../../utils/MoviesApi';
 import './Movies.css';
 
 
 function Movies() {
-    const [cardsData, setCardsData] = useState();
+    const movieApi = useMoviesApi();
+    const [moviesData, setMoviesData] = useState();
 
     useEffect(() => {
-        fetch('https://api.nomoreparties.co/beatfilm-movies', {
-            method: 'GET'
-        }).then(response => {
-            return response.json();
-        }).then(data => {
-            setCardsData(data);
+        movieApi.getMovies().then(data => {
+            setMoviesData(data);
         })
     }, [])
 
     return (
         <div className="movies">
             <SearchForm />
-            {cardsData ? <MoviesCardList data={cardsData} /> : <Preloader />}
+            {moviesData ? <MoviesCardList data={moviesData} /> : <Preloader />}
         </div>
 
     )
