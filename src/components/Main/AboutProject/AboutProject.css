@@ -1,0 +1,130 @@
+.about-project {
+    padding: 75px 70px;
+}
+
+.about-project__info {
+    display: flex;
+    margin-top: 70px;
+    gap: 40px;
+}
+
+.about-project__tab-title {
+    font-weight: 400;
+    margin: 0;
+    font-size: 22px;
+    line-height: 24px;
+    margin-bottom: 26px;
+    letter-spacing: -0.04em;
+}
+
+.about-project__tab-description {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 110px;
+}
+
+.about-project__progress {
+    display: flex;
+}
+
+.about-project__progress-first {
+    width: 25%;
+}
+
+.about-project__progress-title {
+    margin: 0;
+    text-align: center;
+    padding: 9px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+}
+
+.about-project__progress-first>.about-project__progress-title {
+    background-color: #2BE080;
+}
+
+.about-project__progress-second {
+    width: 75%;
+}
+
+.about-project__progress-second>.about-project__progress-title {
+    background-color: #F2F2F2;
+}
+
+.about-project__progress-description {
+    margin: 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+    margin-top: 14px;
+    margin-bottom: 35px;
+}
+
+
+@media screen and (max-width: 1279px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+
+    .about-project__info {
+        gap: 30px;
+    }
+
+    .about-project__tab-title {
+        font-size: 20px;
+        margin-bottom: 22px;
+    }
+
+    .about-project__tab-description {
+        font-size: 12px;
+        line-height: 18px;
+        margin-bottom: 93px;
+    }
+
+    .about-project__progress-description {
+        margin-bottom: 0;
+        font-weight: 400;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+
+    .about-project__info {
+        display: block;
+        margin-top: 89px;
+    }
+
+    .about-project__tab-title {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 16px;
+    }
+
+    .about-project__tab-description {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 56px;
+    }
+
+    .about-project__progress-title {
+        margin: 0;
+        font-size: 11px;
+        line-height: 13px;
+    }
+
+    .about-project__progress-description {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+        margin-top: 10px;
+    }
+}

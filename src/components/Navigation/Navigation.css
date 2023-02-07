@@ -1,0 +1,204 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    margin-left: 44px;
+    align-items: center;
+    position: relative;
+}
+
+.account-button__wrapper {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.account-button__wrapper:hover {
+    text-decoration: underline;
+}
+
+.account-button {
+    cursor: pointer;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 11px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-right: 3px;
+    border: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+}
+
+.icon-wrapper {
+    width: 26px;
+    height: 26px;
+    border-radius: 50px;
+    background-color: #F9F9F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7px;
+}
+
+.navigation__movies {
+    margin: 0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    color: #000000;
+    margin-right: 16px;
+}
+
+.navigation__saved-movies {
+    font-weight: 400;
+}
+
+.hamburger-menu {
+    display: none;
+}
+
+.hamburger-menu__navigation {
+    margin: 0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin-bottom: 28px;
+}
+
+#menu__toggle {
+    opacity: 0;
+}
+
+#menu__toggle:checked+.menu__btn>span {
+    transform: rotate(45deg);
+}
+
+#menu__toggle:checked+.menu__btn>span::before {
+    top: 0;
+    transform: rotate(0deg);
+}
+
+#menu__toggle:checked+.menu__btn>span::after {
+    top: 0;
+    transform: rotate(90deg);
+}
+
+#menu__toggle:checked~.menu__box {
+    right: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+#menu__toggle:checked~.menu__background {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.375);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.menu__box>li:last-child {
+    position: absolute;
+    bottom: 90px;
+}
+
+.menu__btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 18px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.menu__btn:hover {
+    opacity: 0.8;
+}
+
+.menu__btn>span,
+.menu__btn>span::before,
+.menu__btn>span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #000000;
+    transition-duration: .25s;
+}
+
+.menu__btn>span::before {
+    content: '';
+    top: -7px;
+}
+
+.menu__btn>span::after {
+    content: '';
+    top: 7px;
+}
+
+.menu__box {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 520px;
+    z-index: 1;
+    height: 100vh;
+    margin: 0;
+    padding: 159px 0;
+    list-style: none;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    transition-duration: .25s;
+}
+
+.menu__item {
+    display: block;
+    padding: 28px 0;
+    text-decoration: none;
+    transition-duration: .25s;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.menu__box>li:hover>a {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1279px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .navigation__desctop {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .menu__btn {
+        width: 22px;
+    }
+
+    .menu__box {
+        width: 100%;
+        height: 100vh;
+        padding: 144px 0 0;
+    }
+
+}
