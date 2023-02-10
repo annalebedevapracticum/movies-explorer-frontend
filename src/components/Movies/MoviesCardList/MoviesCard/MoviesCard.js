@@ -4,7 +4,7 @@ import './MoviesCard.css';
 import iconRemove from '../../../../images/delete.svg';
 import save from '../../../../images/add.svg';
 
-function MoviesCard({ link, name, duration, isLiked, hasDelete, onCardLike, onCardDelete }) {
+function MoviesCard({ link, name, duration, isLiked, hasDelete, onCardLike, onCardDelete, trailerLink }) {
 
     const getFilmDuration = () => {
         const hours = Math.trunc(duration / 60);
@@ -19,7 +19,7 @@ function MoviesCard({ link, name, duration, isLiked, hasDelete, onCardLike, onCa
     // const isOwner = owner._id === currentUser._id;
     return (
         <div className="movies-card">
-            <img className="movies-card__image" alt="Постер" src={link} />
+            <a href={trailerLink} target="_blank" rel="noreferrer"><img className="movies-card__image" alt="Постер" src={link} /></a>
             {hasDelete && <button type="button" onClick={onCardDelete} className="movies-card__toogl"><img alt="Удалить" src={iconRemove} /></button>}
             {!hasDelete && isLiked && <button type="button" onClick={onCardDelete} className="movies-card__toogl"><img alt="Удалить" src={save} /></button>}
             {!hasDelete && !isLiked && <button type="button" onClick={onCardDelete} className="movies-card__save">Сохранить</button>}

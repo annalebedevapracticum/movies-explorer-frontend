@@ -14,15 +14,19 @@ import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { useMainApi } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
+import { CurrentUserContext } from '../../utils/helpers';
+import Preloader from '../Movies/Preloader/Preloader';
 
 
 
 function App() {
+  const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
   const apiInstance = useMainApi();
 
   const login = ({ email, password }) => {
-    return apiInstance.authorize({ email, password }).then(token => {
+    return apiInstance.authorize({ email, password }).then(({ token }) => {
       localStorage.setItem('token', token);
       setLoggedIn(true);
     })
@@ -37,15 +41,24 @@ function App() {
     setLoggedIn(false);
   };
 
+  const saveUser = ({ email, name }) => {
+    return apiInstance.updateUserInfo({ email, name }).then(user => {
+      setUser(user.data);
+    });
+  };
+
   const checkToken = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
+      setLoading(false);
       return;
     }
-    const { data } = await apiInstance.checkMe();
+    const { data } = await apiInstance.getUserInfo();
     if (data.email) {
       setLoggedIn(true);
+      setUser(data);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -55,44 +68,46 @@ function App() {
 
   return (
     <div className="page">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<>
-            <Header loggedIn={loggedIn} isMainPage />
-            <Main />
-            <Footer />
-          </>
-          } />
-          <Route path="/movies" element={<ProtectedRoute loggedIn={loggedIn}>
-            <Header loggedIn={loggedIn} />
-            <Movies />
-            <Footer />
-          </ProtectedRoute>
-          } />
-          <Route path="/saved-movies" element={<ProtectedRoute loggedIn={loggedIn}>
-            <Header loggedIn={loggedIn} />
-            <SavedMovies />
-            <Footer />
-          </ProtectedRoute>
-          } />
-          <Route path="/signin" element={<>
-            <Login onLogin={login} /></>
-          } />
-          <Route path="/signup" element={<>
-            <Register onRegister={register} /></>
-          } />
-          <Route path="/profile" element={<ProtectedRoute loggedIn={loggedIn}>
-            <Header loggedIn={loggedIn} />
-            <Profile onLogout={logout} />
-          </ProtectedRoute>
-          } />
-          <Route path="/error/:id" element={<>
-            <ErrorPage />
-          </>
-          } />
-        </Routes>
+      {loading ? <Preloader /> : <CurrentUserContext.Provider value={user}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<>
+              <Header loggedIn={loggedIn} isMainPage />
+              <Main />
+              <Footer />
+            </>
+            } />
+            <Route path="/movies" element={<ProtectedRoute loggedIn={loggedIn}>
+              <Header loggedIn={loggedIn} />
+              <Movies />
+              <Footer />
+            </ProtectedRoute>
+            } />
+            <Route path="/saved-movies" element={<ProtectedRoute loggedIn={loggedIn}>
+              <Header loggedIn={loggedIn} />
+              <SavedMovies />
+              <Footer />
+            </ProtectedRoute>
+            } />
+            <Route path="/signin" element={<>
+              <Login onLogin={login} /></>
+            } />
+            <Route path="/signup" element={<>
+              <Register onRegister={register} /></>
+            } />
+            <Route path="/profile" element={<ProtectedRoute loggedIn={loggedIn}>
+              <Header loggedIn={loggedIn} />
+              <Profile onLogout={logout} onSave={saveUser} />
+            </ProtectedRoute>
+            } />
+            <Route path="/error/:id" element={<>
+              <ErrorPage />
+            </>
+            } />
+          </Routes>
 
-      </BrowserRouter>
+        </BrowserRouter>
+      </CurrentUserContext.Provider>}
     </div>
   );
 }

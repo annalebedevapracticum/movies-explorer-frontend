@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import { validateLoginForm } from '../../utils/validate';
 import './Login.css';
 
 
@@ -12,12 +13,16 @@ function Login({ onLogin }) {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        onLogin({ email, password }).then(() => {
-            navigate('/movies');
-        }).catch(error => {
-            setError('Что-то пошло не так...');
-            console.log(error);
-        })
+        const errors = validateLoginForm({ email, password });
+        if (errors) {
+            setError(errors);
+        } else {
+            onLogin({ email, password }).then(() => {
+                navigate('/movies');
+            }).catch(error => {
+                setError({ api: error.message });
+            })
+        }
     }
 
     function handleEmailChange(e) {
@@ -36,10 +41,12 @@ function Login({ onLogin }) {
                     <label className="login__label" htmlFor="email">Email</label>
                     <input id="email" className="login__input" value={email} onChange={handleEmailChange} name="email" type="email" />
                     <div className="divider" />
+                    {error?.email && <div className="login__error">{error.email.slice(-1)[0]}</div>}
                     <label className="login__label" htmlFor="password">Пароль</label>
                     <input id="password" className="login__input" value={password} onChange={handlePasswordChange} name="password" type="password" />
                     <div className="divider" />
-                    {error && <div className="login__error">{error}</div>}
+                    {error?.password && <div className="login__error">{error.password.slice(-1)[0]}</div>}
+                    {error?.api && <div className="login__error">{error.api}</div>}
                 </div>
             </div>
             <button type="submit" className="login__button">Войти</button>

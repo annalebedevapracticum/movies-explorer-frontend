@@ -8,7 +8,7 @@ export const useMainApi = () => {
         })
     };
 
-    const updateUserInfo = (email, name) => {
+    const updateUserInfo = ({email, name}) => {
         return request(`${BASE_URL}/users/me`, {
             method: 'PATCH',
             body: JSON.stringify({
