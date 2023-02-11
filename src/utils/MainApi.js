@@ -8,7 +8,7 @@ export const useMainApi = () => {
         })
     };
 
-    const updateUserInfo = ({email, name}) => {
+    const updateUserInfo = ({ email, name }) => {
         return request(`${BASE_URL}/users/me`, {
             method: 'PATCH',
             body: JSON.stringify({
@@ -24,11 +24,11 @@ export const useMainApi = () => {
         })
     };
 
-    const addMovie = ({ country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId }) => {
+    const addMovie = ({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }) => {
         return request(`${BASE_URL}/movies`, {
             method: 'POST',
             body: JSON.stringify({
-                country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail, movieId
+                country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
             })
         })
     };
@@ -39,7 +39,7 @@ export const useMainApi = () => {
         })
     };
 
-    const register = ({email, password, name}) => {
+    const register = ({ email, password, name }) => {
         return request(`${BASE_URL}/signup`, {
             method: 'POST',
             body: JSON.stringify({
@@ -61,7 +61,7 @@ export const useMainApi = () => {
     };
 
     return {
-        getUserInfo, updateUserInfo, getMoviesInfo, addMovies: addMovie, removeMovies: removeMovie, register, authorize
+        getUserInfo, updateUserInfo, getMoviesInfo, addMovie, removeMovie, register, authorize
     }
 }
 

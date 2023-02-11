@@ -5,7 +5,7 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import { validateSearch } from '../../../utils/validate';
 
 
-function SearchForm({ onSearch, moviesData }) {
+function SearchForm({ onSearch, moviesData, myMoviesData }) {
     const [search, setSearch] = useState('');
     const [isShortMovies, setIsShortMovies] = useState(false);
 
@@ -19,6 +19,12 @@ function SearchForm({ onSearch, moviesData }) {
             }
         }
     }, [moviesData])
+
+    useEffect(() => {
+        if (myMoviesData) {
+            onSearch({ search: search || "", isShortMovies });
+        }
+    }, [myMoviesData])
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -35,7 +41,7 @@ function SearchForm({ onSearch, moviesData }) {
 
     return (<div className="search-form__wrapper">
         <form className="search-form" onSubmit={handleSearch}>
-            <input placeholder="Фильм" type="text" className="search-form__find" value={search} onChange={handleSearchChange} name="search"/>
+            <input placeholder="Фильм" type="text" className="search-form__find" value={search} onChange={handleSearchChange} name="search" />
             <button type="submit" className="search-form__button"><img alt="Поиск" src={find} /></button>
         </form>
         <FilterCheckbox label="Короткометражки" checked={isShortMovies} onChange={handleShortChange} />

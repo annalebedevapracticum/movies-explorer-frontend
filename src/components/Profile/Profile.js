@@ -65,7 +65,7 @@ function Profile({ onLogout, onSave }) {
             {!isEditMode
                 ? <button className="profile__button" onClick={handleEditModeClick}> Редактировать </button>
                 : <button type="submit" className="profile__button-save"> Сохранить </button>}
-            {!isEditMode && <Link to="/signin"><button type="submit" className="profile__button_exit" onClick={onLogout}>Выйти из аккаунта</button></Link>}
+            {!isEditMode && <Link to="/"><button type="submit" className="profile__button_exit" onClick={onLogout}>Выйти из аккаунта</button></Link>}
         </form>
     )
 }

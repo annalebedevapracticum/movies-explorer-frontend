@@ -2,7 +2,7 @@ import './App.css';
 import '../../vendor/normalize.css'
 import Header from '../Header/Header';
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from "../Footer/Footer";
 import { useState } from 'react';
 import Main from '../Main/Main';
@@ -33,17 +33,21 @@ function App() {
   };
 
   const register = ({ email, password, name }) => {
-    return apiInstance.register({ email, password, name })
+    return apiInstance.register({ email, password, name }).then(({ token }) => {
+      localStorage.setItem('token', token);
+      setLoggedIn(true);
+    })
   };
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('search');
     setLoggedIn(false);
   };
 
   const saveUser = ({ email, name }) => {
     return apiInstance.updateUserInfo({ email, name }).then(user => {
-      setUser(user.data);
+      setUser(user);
     });
   };
 
@@ -53,7 +57,7 @@ function App() {
       setLoading(false);
       return;
     }
-    const { data } = await apiInstance.getUserInfo();
+    const data = await apiInstance.getUserInfo();
     if (data.email) {
       setLoggedIn(true);
       setUser(data);
@@ -63,7 +67,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
-  }, [loggedIn]);
+  }, []);
 
 
   return (
@@ -89,11 +93,13 @@ function App() {
               <Footer />
             </ProtectedRoute>
             } />
-            <Route path="/signin" element={<>
-              <Login onLogin={login} /></>
+            <Route path="/signin" element={<ProtectedRoute loggedIn={!loggedIn}>
+              <Login onLogin={login} />
+            </ProtectedRoute>
             } />
-            <Route path="/signup" element={<>
-              <Register onRegister={register} /></>
+            <Route path="/signup" element={<ProtectedRoute loggedIn={!loggedIn}>
+              <Register onRegister={register} />
+            </ProtectedRoute>
             } />
             <Route path="/profile" element={<ProtectedRoute loggedIn={loggedIn}>
               <Header loggedIn={loggedIn} />
@@ -102,6 +108,10 @@ function App() {
             } />
             <Route path="/error/:id" element={<>
               <ErrorPage />
+            </>
+            } />
+            <Route path="*" element={<>
+              <Navigate to="/error/404" />
             </>
             } />
           </Routes>

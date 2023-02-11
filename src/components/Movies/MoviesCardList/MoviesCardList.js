@@ -1,33 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { MOBILE_SIZE, moviesBaseUrl, TABLET_SIZE, VIEW_DATA } from '../../../utils/constants';
 import MoviesCard from './MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const baseUrl = 'https://api.nomoreparties.co';
-
-const DESCTOP_SIZE = 1280;
-const TABLET_SIZE = 768;
-const MOBILE_SIZE = 480;
-
-const VIEW_DATA = {
-    MOBILE: {
-        count: 1,
-        add: 2,
-    },
-    TABLET: {
-        count: 2,
-        add: 2,
-    },
-    DESCTOP: {
-        count: 3,
-        add: 3,
-    },
-}
-
-function MoviesCardList({ data, error }) {
+function MoviesCardList({ data, error, myData, handleCardLike, handleCardDelete }) {
+    const cardsData = data || myData;
+    const IS_SAVED_MOVIES_PAGE = !data;
     const [cardsCount, setCardsCount] = useState(0);
     const [addCardsCount, setAddCardsCount] = useState(0);
     const [viewType, setViewType] = useState('MOBILE');
-
     const timerObj = useMemo(() => ({ timer: undefined }), [])
 
     useEffect(() => {
@@ -73,16 +54,32 @@ function MoviesCardList({ data, error }) {
     }
 
     const getCards = () => {
-        return data.slice(0, cardsCount);
+        return cardsData.slice(0, cardsCount);
     }
 
     return (<>
         <div className='movies-cards'>
-            {data.length
-                ? getCards().map((item, index) => <MoviesCard {...item} link={baseUrl + item.image.url} name={item.nameRU} duration={item.duration} isLiked={index % 3 === 0} hasDelete={index % 5 === 0} key={index} />)
+            {cardsData.length && !error
+                ? getCards().map((item) => {
+                    let myFilm = item;
+                    if (!IS_SAVED_MOVIES_PAGE) {
+                        myFilm = myData.find(film => film.movieId === item.id);
+                    }
+                    return <MoviesCard
+                        {...item}
+                        link={IS_SAVED_MOVIES_PAGE ? item.image : moviesBaseUrl + item.image.url}
+                        name={item.nameRU}
+                        duration={item.duration}
+                        hasDelete={IS_SAVED_MOVIES_PAGE}
+                        isLiked={!!myFilm}
+                        key={IS_SAVED_MOVIES_PAGE ? item._id : item.id}
+                        onCardDelete={() => handleCardDelete(myFilm._id)}
+                        onCardLike={() => handleCardLike({ ...item, movieId: item.id })}
+                    />
+                })
                 : <div className='movies-cards__not-found'>{error || 'По вашему запросу ничего не найдено'}</div>}
         </div>
-        {cardsCount < data.length && <div className='movies-cards__wrapper'>
+        {cardsCount < cardsData.length && !error && <div className='movies-cards__wrapper'>
             <button className='movies-cards__button' onClick={handleMoreClick}>Ещё</button>
         </div>}
     </>
