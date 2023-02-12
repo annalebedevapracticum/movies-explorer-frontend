@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { validateLoginForm } from '../../utils/validate';
@@ -11,18 +11,22 @@ function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        const errors = validateLoginForm({ email, password });
+        if (!email && !password) {
+            setError({});
+        } else {
+            setError(errors);
+        }
+    }, [email, password]);
+
     const handleLogin = (e) => {
         e.preventDefault();
-        const errors = validateLoginForm({ email, password });
-        if (errors) {
-            setError(errors);
-        } else {
-            onLogin({ email, password }).then(() => {
-                navigate('/movies');
-            }).catch(error => {
-                setError({ api: error.message });
-            })
-        }
+        onLogin({ email, password }).then(() => {
+            navigate('/movies');
+        }).catch(error => {
+            setError({ api: error.message });
+        })
     }
 
     function handleEmailChange(e) {
@@ -49,7 +53,7 @@ function Login({ onLogin }) {
                     {error?.api && <div className="login__error">{error.api}</div>}
                 </div>
             </div>
-            <button type="submit" className="login__button">Войти</button>
+            <button type="submit" className="login__button" disabled={!!error}>Войти</button>
             <div className="login__check">
                 <span className="login__description">Ещё не зарегистрированы?</span>
                 <Link to='/signup' className="login__entry">Регистрация</Link>

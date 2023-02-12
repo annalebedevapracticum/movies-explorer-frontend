@@ -6,15 +6,15 @@ export const MOBILE_SIZE = 480;
 
 export const VIEW_DATA = {
     MOBILE: {
-        count: 1,
+        count: 5,
         add: 2,
     },
     TABLET: {
-        count: 2,
+        count: 8,
         add: 2,
     },
     DESCTOP: {
-        count: 3,
+        count: 12,
         add: 3,
     },
 }

@@ -39,7 +39,7 @@ function SavedMovies() {
 
     return (
         <div className="saved-movies">
-            <SearchForm onSearch={handleSearch} myMoviesData={myMoviesData}/>
+            <SearchForm onSearch={handleSearch} moviesData={myMoviesData} isSavedPage/>
             {!isLoading ? <MoviesCardList
                 myData={visibleMovies}
                 error={error}

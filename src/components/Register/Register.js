@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../../images/logo.svg';
 import { validateRegistrationForm } from "../../utils/validate";
@@ -14,19 +14,25 @@ function Register({ onRegister }) {
     const [name, setName] = useState('');
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+        const errors = validateRegistrationForm({ email, password, name });
+        if (!email && !password && !name) {
+            setError({});
+        } else {
+            setError(errors);
+        }
+    }, [email, password, name]);
+
     const handleRegister = (e) => {
         e.preventDefault();
-        const errors = validateRegistrationForm({ email, password, name });
-        if (errors) {
-            setError(errors);
-        } else {
-            onRegister({ email, password, name }).then(() => {
-                navigate('/movies');
-            }).catch(error => {
-                setError({ api: error.message });
-            })
-        }
+        onRegister({ email, password, name }).then(() => {
+            navigate('/movies');
+        }).catch(error => {
+            setError({ api: error.message });
+        })
     }
+
     function handleNameChange(e) {
         setName(e.target.value);
     }
@@ -59,7 +65,7 @@ function Register({ onRegister }) {
                     {error?.api && <div className="login__error">{error.api}</div>}
                 </div>
             </div>
-            <button type="submit" className="register__button login__button">Зарегистрироваться</button>
+            <button type="submit" className="register__button login__button" disabled={!!error}>Зарегистрироваться</button>
             <div className="login__check">
                 <span className="login__description">Уже зарегистрированы?</span>
                 <Link to='/signin' className="login__entry">Войти</Link>

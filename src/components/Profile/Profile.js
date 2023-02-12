@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 import '../Login/Login.css'
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../utils/helpers';
 import { validateProfileForm } from '../../utils/validate';
+import { Toast } from './Toast/Toast';
 
 
 function Profile({ onLogout, onSave }) {
@@ -13,23 +14,35 @@ function Profile({ onLogout, onSave }) {
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
     const [isEditMode, setisEditMode] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+
+
+    useEffect(() => {
+        const errors = validateProfileForm({ email, name });
+        setError(errors);
+    }, [email, name]);
+
+    useEffect(() => {
+        if (showToast) {
+            setTimeout(() => {
+                setShowToast(false);
+            }, 2000)
+        }
+    }, [showToast])
 
 
     const handleSaveProfile = (e) => {
         e.preventDefault();
-        const errors = validateProfileForm({ email, name });
-        if (errors) {
-            setError(errors);
+
+        if (user.name === name && user.email === email) {
+            setisEditMode(false);
         } else {
-            if (user.name === name && user.email === email) {
+            onSave({ email, name }).then(() => {
                 setisEditMode(false);
-            } else {
-                onSave({ email, name }).then(() => {
-                    setisEditMode(false);
-                }).catch(error => {
-                    setError({ api: error.message });
-                })
-            }
+                setShowToast(true);
+            }).catch(error => {
+                setError({ api: error.message });
+            })
         }
     }
 
@@ -50,6 +63,7 @@ function Profile({ onLogout, onSave }) {
 
     return (
         <form className="profile" onSubmit={handleSaveProfile} noValidate>
+            <Toast show={showToast} />
             <h2 className="profile__welcome">Привет, {user.name}!</h2>
             <div className='profile__wrapper profile__wrapper_border'>
                 <label className="profile__label" htmlFor="name">Имя</label>
@@ -64,7 +78,7 @@ function Profile({ onLogout, onSave }) {
             {error?.api && <div className="login__error">{error.api}</div>}
             {!isEditMode
                 ? <button className="profile__button" onClick={handleEditModeClick}> Редактировать </button>
-                : <button type="submit" className="profile__button-save"> Сохранить </button>}
+                : <button type="submit" className="profile__button-save" disabled={!!error}> Сохранить </button>}
             {!isEditMode && <Link to="/"><button type="submit" className="profile__button_exit" onClick={onLogout}>Выйти из аккаунта</button></Link>}
         </form>
     )

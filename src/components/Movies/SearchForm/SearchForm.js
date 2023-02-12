@@ -5,26 +5,25 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import { validateSearch } from '../../../utils/validate';
 
 
-function SearchForm({ onSearch, moviesData, myMoviesData }) {
+function SearchForm({ onSearch, moviesData, isSavedPage }) {
     const [search, setSearch] = useState('');
     const [isShortMovies, setIsShortMovies] = useState(false);
 
     useEffect(() => {
-        if (moviesData) {
+        if (!isSavedPage) {
             const searchParams = JSON.parse(localStorage.getItem('searchParams'));
-            setSearch(searchParams.search);
-            setIsShortMovies(searchParams.isShortMovies)
-            if (searchParams.search) {
-                onSearch({ search: searchParams.search, isShortMovies });
+            if (searchParams) {
+                setSearch(searchParams.search);
+                setIsShortMovies(searchParams.isShortMovies);
             }
         }
-    }, [moviesData])
+    }, [])
 
     useEffect(() => {
-        if (myMoviesData) {
+        if (moviesData) {
             onSearch({ search: search || "", isShortMovies });
         }
-    }, [myMoviesData])
+    }, [moviesData, isShortMovies])
 
     const handleSearch = (e) => {
         e.preventDefault();
