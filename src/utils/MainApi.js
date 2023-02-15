@@ -1,15 +1,14 @@
-import { request } from "./helpers";
+import { mainRequest } from "./helpers";
 
 export const useMainApi = () => {
-    const BASE_URL = 'https://api.lebedeva-films.nomoredomains.rocks';
     const getUserInfo = () => {
-        return request(`${BASE_URL}/users/me`, {
+        return mainRequest(`/users/me`, {
             method: 'GET',
         })
     };
 
     const updateUserInfo = ({ email, name }) => {
-        return request(`${BASE_URL}/users/me`, {
+        return mainRequest(`/users/me`, {
             method: 'PATCH',
             body: JSON.stringify({
                 email,
@@ -19,13 +18,13 @@ export const useMainApi = () => {
     };
 
     const getMoviesInfo = () => {
-        return request(`${BASE_URL}/movies`, {
+        return mainRequest(`/movies`, {
             method: 'GET',
         })
     };
 
     const addMovie = ({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }) => {
-        return request(`${BASE_URL}/movies`, {
+        return mainRequest(`/movies`, {
             method: 'POST',
             body: JSON.stringify({
                 country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId
@@ -34,13 +33,13 @@ export const useMainApi = () => {
     };
 
     const removeMovie = (movieId) => {
-        return request(`${BASE_URL}/movies/${movieId}`, {
+        return mainRequest(`/movies/${movieId}`, {
             method: 'DELETE',
         })
     };
 
     const register = ({ email, password, name }) => {
-        return request(`${BASE_URL}/signup`, {
+        return mainRequest(`/signup`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
@@ -51,7 +50,7 @@ export const useMainApi = () => {
     };
 
     const authorize = ({ email, password }) => {
-        return request(`${BASE_URL}/signin`, {
+        return mainRequest(`/signin`, {
             method: 'POST',
             body: JSON.stringify({
                 email,

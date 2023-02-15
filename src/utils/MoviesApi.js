@@ -1,10 +1,8 @@
-import { request } from "./helpers";
+import { moviesRequest } from "./helpers";
 
 export const useMoviesApi = () => {
-    const BASE_URL = 'https://api.nomoreparties.co';
-
     const getMovies = () => {
-        return request(`${BASE_URL}/beatfilm-movies`, {
+        return moviesRequest(`/beatfilm-movies`, {
             method: 'GET',
         })
     };
