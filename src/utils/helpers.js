@@ -15,12 +15,7 @@ export const getRequestFunc = (baseUrl, fixedParams) => {
     });
 }
 
-export const mainRequest = getRequestFunc('https://api.lebedeva-films.nomoredomains.rocks', {
-  headers: {
-    'Content-Type': 'application/json',
-    authorization: localStorage.getItem('token'),
-  }
-});
+export const mainRequest = getRequestFunc('https://api.lebedeva-films.nomoredomains.rocks');
 
 export const moviesRequest = getRequestFunc('https://api.nomoreparties.co');
 

@@ -6,7 +6,7 @@ import { useMoviesApi } from '../../utils/MoviesApi';
 import './Movies.css';
 import { useMainApi } from "../../utils/MainApi";
 import { getSearchedMovies } from "../../utils/helpers";
-import { moviesBaseUrl } from "../../utils/constants";
+import { moviesBaseUrl, SEARCH_KEY } from "../../utils/constants";
 
 
 function Movies() {
@@ -31,7 +31,7 @@ function Movies() {
     }, [])
 
     const handleSearch = ({ errors, search, isShortMovies }) => {
-        localStorage.setItem('searchParams', JSON.stringify({ search, isShortMovies }));
+        localStorage.setItem(SEARCH_KEY, JSON.stringify({ search, isShortMovies }));
         if (errors) {
             setError(errors.search[0]);
         } else {

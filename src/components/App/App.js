@@ -16,6 +16,7 @@ import { useMainApi } from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
 import { CurrentUserContext } from '../../utils/helpers';
 import Preloader from '../Movies/Preloader/Preloader';
+import { SEARCH_KEY, TOKEN_KEY } from '../../utils/constants';
 
 
 
@@ -27,22 +28,23 @@ function App() {
 
   const login = ({ email, password }) => {
     return apiInstance.authorize({ email, password }).then(({ token }) => {
-      localStorage.setItem('token', token);
+      localStorage.setItem(TOKEN_KEY, token);
       setLoggedIn(true);
     })
   };
 
   const register = ({ email, password, name }) => {
     return apiInstance.register({ email, password, name }).then(({ token }) => {
-      localStorage.setItem('token', token);
+      localStorage.setItem(TOKEN_KEY, token);
       setLoggedIn(true);
     })
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('search');
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(SEARCH_KEY);
     setLoggedIn(false);
+    setUser({});
   };
 
   const saveUser = ({ email, name }) => {
@@ -52,7 +54,8 @@ function App() {
   };
 
   const checkToken = async () => {
-    const token = localStorage.getItem('token');
+    setLoading(true);
+    const token = localStorage.getItem(TOKEN_KEY);
     if (!token) {
       setLoading(false);
       return;
@@ -72,8 +75,8 @@ function App() {
 
   return (
     <div className="page">
-      {loading ? <Preloader /> : <CurrentUserContext.Provider value={user}>
-        <BrowserRouter>
+      <CurrentUserContext.Provider value={user}>
+        {loading ? <Preloader /> : <BrowserRouter>
           <Routes>
             <Route path="/" element={<>
               <Header loggedIn={loggedIn} isMainPage />
@@ -115,9 +118,8 @@ function App() {
             </>
             } />
           </Routes>
-
-        </BrowserRouter>
-      </CurrentUserContext.Provider>}
+        </BrowserRouter>}
+      </CurrentUserContext.Provider>
     </div>
   );
 }

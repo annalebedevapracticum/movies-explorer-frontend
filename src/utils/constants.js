@@ -20,3 +20,6 @@ export const VIEW_DATA = {
 }
 
 export const SHORT_MOVIES_TIME = 40;
+
+export const SEARCH_KEY = 'searchParams';
+export const TOKEN_KEY = 'token';

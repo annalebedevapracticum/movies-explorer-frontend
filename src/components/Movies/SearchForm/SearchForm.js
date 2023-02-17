@@ -3,6 +3,7 @@ import './SearchForm.css';
 import find from '../../../images/find.svg';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import { validateSearch } from '../../../utils/validate';
+import { SEARCH_KEY } from '../../../utils/constants';
 
 
 function SearchForm({ onSearch, moviesData, isSavedPage }) {
@@ -11,7 +12,7 @@ function SearchForm({ onSearch, moviesData, isSavedPage }) {
 
     useEffect(() => {
         if (!isSavedPage) {
-            const searchParams = JSON.parse(localStorage.getItem('searchParams'));
+            const searchParams = JSON.parse(localStorage.getItem(SEARCH_KEY));
             if (searchParams) {
                 setSearch(searchParams.search);
                 setIsShortMovies(searchParams.isShortMovies);
