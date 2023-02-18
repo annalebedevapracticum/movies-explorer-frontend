@@ -19,7 +19,7 @@
     height: 14px;
     border-radius: 20px;
     vertical-align: top;
-    background: #2BE080;
+    background: #A0A0A0;
     margin-left: 14px;
 }
 
@@ -27,7 +27,7 @@
     content: '';
     position: absolute;
     top: 2px;
-    right: 2px;
+    left: 2px;
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -36,7 +36,7 @@
 }
 
 .checkbox input[type=checkbox]:checked+.checkbox__filter-switch {
-    background: #A0A0A0;
+    background: #2BE080;
 }
 
 .checkbox input[type=checkbox] {
@@ -49,7 +49,7 @@
 }
 
 .checkbox input[type=checkbox]:checked+.checkbox__filter-switch:before {
-    transform: translateX(-20px);
+    transform: translateX(20px);
 }
 
 .checkbox input[type="checkbox"]:not(:disabled)+.checkbox__filter-switch {

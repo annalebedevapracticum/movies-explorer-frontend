@@ -30,6 +30,7 @@
     color: #2BE080;
     margin-top: 184px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .error-page__button:hover {

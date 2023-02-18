@@ -7,7 +7,7 @@ function Navigation() {
 
     useEffect(() => {
         setMobileMenuVisible(false);
-    }, [window.location.href]);
+    }, [window.location.pathname]);
 
     const handleBurgerChange = () => {
         setMobileMenuVisible(!mobileMenuVisible);
@@ -27,13 +27,13 @@ function Navigation() {
                     </div>
                 </button></Link>
             </div>
-            <div class="hamburger-menu">
+            <div className="hamburger-menu">
                 <input id="menu__toggle" type="checkbox" checked={mobileMenuVisible} onChange={handleBurgerChange} />
-                <label class="menu__btn" for="menu__toggle">
+                <label className="menu__btn" htmlFor="menu__toggle">
                     <span />
                 </label>
                 <div className='menu__background' />
-                <ul class="menu__box">
+                <ul className="menu__box">
                     <li><Link to="/" className="hamburger-menu__navigation">Главная </Link></li>
                     <li><Link to="/movies" className="hamburger-menu__navigation">Фильмы </Link></li>
                     <li><Link to="/saved-movies" className="hamburger-menu__navigation">Сохранённые фильмы</Link></li>

@@ -1,16 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Profile.css';
 import '../Login/Login.css'
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../utils/helpers';
+import { validateProfileForm } from '../../utils/validate';
+import { Toast } from './Toast/Toast';
 
 
-function Profile() {
-    const [error, setError] = useState('Что-то пошло не так...');
-    const basename = 'Виталий';
-    const baseemail = 'pochta@yandex.ru';
+function Profile({ onLogout, onSave }) {
+    const [error, setError] = useState();
+    const user = useContext(CurrentUserContext);
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.name);
+    const [isEditMode, setisEditMode] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
-    const [email, setEmail] = useState(baseemail);
-    const [name, setName] = useState(basename);
+
+    useEffect(() => {
+        const errors = validateProfileForm({ email, name });
+        setError(errors);
+    }, [email, name]);
+
+    useEffect(() => {
+        if (showToast) {
+            setTimeout(() => {
+                setShowToast(false);
+            }, 2000)
+        }
+    }, [showToast])
+
+
+    const handleSaveProfile = (e) => {
+        e.preventDefault();
+
+        if (user.name === name && user.email === email) {
+            setisEditMode(false);
+        } else {
+            onSave({ email, name }).then(() => {
+                setisEditMode(false);
+                setShowToast(true);
+            }).catch(error => {
+                setError({ api: error.message });
+            })
+        }
+    }
+
 
     function handleNameChange(e) {
         setName(e.target.value);
@@ -20,34 +55,31 @@ function Profile() {
         setEmail(e.target.value);
     }
 
-    const [isEditMode, setisEditMode] = useState(false);
-
     function handleEditModeClick(e) {
         e.preventDefault();
-        if (!isEditMode) {
-            setisEditMode(true);
-        } else {
-            // handle save
-            // .then
-            setisEditMode(false);
-        }
+        setisEditMode(true);
     }
 
 
     return (
-        <form className="profile" noValidate>
-            <h2 className="profile__welcome">Привет, {name}!</h2>
+        <form className="profile" onSubmit={handleSaveProfile} noValidate>
+            <Toast show={showToast} />
+            <h2 className="profile__welcome">Привет, {user.name}!</h2>
             <div className='profile__wrapper profile__wrapper_border'>
                 <label className="profile__label" htmlFor="name">Имя</label>
                 {isEditMode ? <input id="name" className="profile__field" value={name} name="name" type="text" onChange={handleNameChange} /> : <div className="profile__field">{name}</div>}
             </div>
+            {error?.name && <div className="login__error">{error.name.slice(-1)[0]}</div>}
             <div className='profile__wrapper'>
                 <label className="profile__label" htmlFor="email">E-mail</label>
                 {isEditMode ? <input id="email" className="profile__field" value={email} name="email" type="email" onChange={handleEmailChange} /> : <div className="profile__field">{email}</div>}
-                {error && <div className="login__error">{error}</div>}
             </div>
-            {!isEditMode ? <button type="submit" className="profile__button" onClick={handleEditModeClick}> Редактировать </button> : <button className="profile__button-save"> Сохранить </button>}
-            {!isEditMode && <Link to="/signup"><button type="submit" className="profile__button_exit">Выйти из аккаунта</button></Link>}
+            {error?.email && <div className="login__error">{error.email.slice(-1)[0]}</div>}
+            {error?.api && <div className="login__error">{error.api}</div>}
+            {!isEditMode
+                ? <button className="profile__button" onClick={handleEditModeClick}> Редактировать </button>
+                : <button type="submit" className="profile__button-save" disabled={!!error}> Сохранить </button>}
+            {!isEditMode && <Link to="/"><button type="submit" className="profile__button_exit" onClick={onLogout}>Выйти из аккаунта</button></Link>}
         </form>
     )
 }
